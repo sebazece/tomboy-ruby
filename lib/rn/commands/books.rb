@@ -62,7 +62,7 @@ module RN
 
           return warn ERRORS[:invalid_name] unless valid_name?(name)
 
-          path = "#{Cons::ROOT_PATH}/#{name}"
+          path = "#{root_path}/#{name}"
 
           return warn ERRORS[:not_found] unless File.exist?(path)
 
@@ -75,7 +75,7 @@ module RN
         include RN::Utils
 
         def print_book
-          Dir.foreach(Cons::ROOT_PATH) do |filename|
+          Dir.foreach(root_path) do |filename|
             next if ['.', '..'].include?(filename)
 
             path = "#{root_path}/#{filename}"

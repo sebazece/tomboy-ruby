@@ -1,15 +1,21 @@
 module RN
   module Utils
+    PERMITTED_CHARS = /\A[-a-z0-9\s]+\Z/i.freeze
+
     def root_path
-      Cons::ROOT_PATH
+      path = Cons::ROOT_PATH
+      Dir.mkdir(path) unless File.exist?(path)
+      path
     end
 
     def valid_name?(name)
-      !/\A[-a-z0-9\s]+\Z/i.match(name).nil?
+      !PERMITTED_CHARS.match(name).nil?
     end
 
     def default_book
-      "#{Cons::ROOT_PATH}/cuaderno_global"
+      path = "#{root_path}/cuaderno_global"
+      Dir.mkdir(path) unless File.exist?(path)
+      path
     end
   end
 end

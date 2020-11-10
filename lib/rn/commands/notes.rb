@@ -25,10 +25,9 @@ module RN
 
         def call(title:, **options)
           book = options[:book]
-          # require 'pry'; binding.pry
           return warn ERRORS[:invalid_name] unless valid_name?(title)
 
-          path = book.nil? ? default_book : "#{Cons::ROOT_PATH}/#{book}"
+          path = book.nil? ? default_book : "#{root_path}/#{book}"
 
           return warn ERRORS[:book_not_found] unless File.exist?(path)
 
@@ -56,14 +55,13 @@ module RN
         def call(title:, **options)
           book = options[:book]
 
-          # require 'pry'; binding.pry
           path = book.nil? ? "#{default_book}/#{title}.rn" : "#{root_path}/#{book}/#{title}.rn"
 
           return warn ERRORS[:book_note_not_found] unless File.exist?(path)
 
           File.delete(path)
 
-          puts '¡Nota eliminado exitosamente!'
+          puts '¡Nota eliminada exitosamente!'
         end
       end
 
