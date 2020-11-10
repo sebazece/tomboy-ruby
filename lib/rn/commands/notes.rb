@@ -27,7 +27,7 @@ module RN
           book = options[:book]
           return warn ERRORS[:invalid_name] unless valid_name?(title)
 
-          path = book.nil? ? default_book : "#{root_path}/#{book}"
+          path = book.nil? ? default_book_path : "#{root_path}/#{book}"
 
           return warn ERRORS[:book_not_found] unless File.exist?(path)
 
@@ -55,7 +55,7 @@ module RN
         def call(title:, **options)
           book = options[:book]
 
-          path = book.nil? ? "#{default_book}/#{title}.rn" : "#{root_path}/#{book}/#{title}.rn"
+          path = book.nil? ? "#{default_book_path}/#{title}.rn" : "#{root_path}/#{book}/#{title}.rn"
 
           return warn ERRORS[:book_note_not_found] unless File.exist?(path)
 
@@ -81,7 +81,7 @@ module RN
 
         def call(title:, **options)
           book = options[:book]
-          path = book.nil? ? "#{default_book}/#{title}.rn" : "#{root_path}/#{book}/#{title}.rn"
+          path = book.nil? ? "#{default_book_path}/#{title}.rn" : "#{root_path}/#{book}/#{title}.rn"
 
           return warn ERRORS[:book_note_not_found] unless File.exist?(path)
 
@@ -109,8 +109,8 @@ module RN
 
           return warn ERRORS[:invalid_name] unless valid_name?(old_title) || valid_name?(new_title)
 
-          old_path = book.nil? ? default_book + "/#{old_title}.rn" : "#{root_path}/#{book}/#{old_title}.rn"
-          new_path = book.nil? ? default_book + "/#{new_title}.rn" : "#{root_path}/#{book}/#{new_title}.rn"
+          old_path = book.nil? ? default_book_path + "/#{old_title}.rn" : "#{root_path}/#{book}/#{old_title}.rn"
+          new_path = book.nil? ? default_book_path + "/#{new_title}.rn" : "#{root_path}/#{book}/#{new_title}.rn"
 
           return warn ERRORS[:note_not_found] unless File.exist?(old_path)
 
@@ -158,7 +158,7 @@ module RN
           return warn ERRORS[:book_not_found] unless File.exist?("#{root_path}/#{book}")
 
           print_files("#{root_path}/#{book}") unless book.nil?
-          print_files(default_book) if global
+          print_files(default_book_path) if global
           print_files(root_path) if !global && book.nil?
         end
       end
@@ -187,9 +187,9 @@ module RN
           book = options[:book]
 
           if book.nil?
-            return warn ERRORS[:book_note_not_found] unless File.exist?("#{default_book}/#{title}.rn")
+            return warn ERRORS[:book_note_not_found] unless File.exist?("#{default_book_path}/#{title}.rn")
 
-            print_content(title, "#{default_book}/#{title}.rn")
+            print_content(title, "#{default_book_path}/#{title}.rn")
           else
             return warn ERRORS[:book_note_not_found] unless File.exist?("#{root_path}/#{book}/#{title}.rn")
 

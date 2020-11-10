@@ -34,10 +34,10 @@ module RN
         require 'fileutils'
 
         def delete_notes_from_global_book
-          Dir.foreach(default_book) do |filename|
+          Dir.foreach(default_book_path) do |filename|
             next if filename == '.' or filename == '..'
 
-            filename_path = "#{default_book}/#{filename}"
+            filename_path = "#{default_book_path}/#{filename}"
             FileUtils.rm(filename_path)
           end
 
