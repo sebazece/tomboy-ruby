@@ -1,16 +1,13 @@
-# rn
 
-Plantilla para comenzar con el Trabajo Práctico Integrador de la cursada 2020 de la materia
-Taller de Tecnologías de Producción de Software - Opción Ruby, de la Facultad de Informática
-de la Universidad Nacional de La Plata.
+## Acerca de
+La herramienta permite la manipulación tanto de notas (archivos `.rn`) como de cuadernos (carpetas), permitiendo la creación, eliminación, editado y listado para cada una.
 
-Ruby Notes, o simplemente `rn`, es un gestor de notas concebido como un clon simplificado
-de la excelente herramienta [TomBoy](https://wiki.gnome.org/Apps/Tomboy).
+las notas y cuadernos se almacenan en la carpeta `.my_rns` dentro del directorio `home` del usuario que ejecuta la aplicación.
 
-Este proyecto es simplemente una plantilla para comenzar a implementar la herramienta e
-intenta proveer un punto de partida para el desarrollo, simplificando el _bootstrap_ del
-proyecto que puede ser una tarea que consume mucho tiempo y conlleva la toma de algunas
-decisiones que pueden tener efectos tanto positivos como negativos en el proyecto.
+Todas las notas se alamacenan en un cuaderno, si no se especifica uno, se guarda en el cuaderno por defecto (`cuaderno_global`)
+
+
+Los nombres de las notas y cuadernos solo aceptan lo letras en minúsculas, mayúscula, números, guiones y guiones bajos
 
 ## Uso de `rn`
 
@@ -44,9 +41,8 @@ $ rn [args]
 ```
 
 > Notá que para la ejecución de la herramienta, es necesario tener una versión reciente de
-> Ruby (2.5 o posterior) y tener instaladas sus dependencias, las cuales se manejan con
-> Bundler. Para más información sobre la instalación de las dependencias, consultar la
-> siguiente sección ("Desarrollo").
+> Ruby (2.5 o posterior) y tener instaladas sus dependencias.
+
 
 Documentar el uso para usuarios finales de la herramienta queda fuera del alcance de esta
 plantilla y **se deja como una tarea para que realices en tu entrega**, pisando el contenido
@@ -55,39 +51,80 @@ documentación necesaria para entender el funcionamiento y uso de la herramienta
 implementado, junto con cualquier decisión de diseño del modelo de datos que consideres
 necesario documentar.
 
-## Desarrollo
+## Documentación
 
-Esta sección provee algunos tips para el desarrollo de tu entrega a partir de esta
-plantilla.
+Los comandos disponibles se listan a continuación.
 
-### Instalación de dependencias
+Aclaración: la palabra notes o books se puede abreviar con `n` o `b` respectivamente
 
-Este proyecto utiliza Bundler para manejar sus dependencias. Si aún no sabés qué es eso
-o cómo usarlo, no te preocupes: ¡lo vamos a ver en breve en la materia! Mientras tanto,
-todo lo que necesitás saber es que Bundler se encarga de instalar las dependencias ("gemas")
-que tu proyecto tenga declaradas en su archivo `Gemfile` al ejecutar el siguiente comando:
+### Notas
+A todos estos comandos se les puede especificar el cuaderno para realizar la acción, esto se hace colocando el flag `--book [book_name]`
+
+- Crear
 
 ```bash
-$ bundle install
+bin/rn notes create [note_name]
 ```
 
-> Nota: Bundler debería estar disponible en tu instalación de Ruby, pero si por algún
-> motivo al intentar ejecutar el comando `bundle` obtenés un error indicando que no se
-> encuentra el comando, podés instalarlo mediante el siguiente comando:
->
-> ```bash
-> $ gem install bundler
-> ```
+- Eliminar
 
-Una vez que la instalación de las dependencias sea exitosa (esto deberías hacerlo solamente
-cuando estés comenzando con la utilización del proyecto), podés comenzar a probar la
-herramienta y a desarrollar tu entrega.
+```bash
+bin/rn notes delete [note_name]
+```
+
+- Editar
+
+```bash
+bin/rn notes edit [note_name]
+```
+
+- Cambiar título
+
+```bash
+bin/rn notes retitle [current_name] [new_name]
+```
+
+- Listar notas
+
+
+  - Si no se especifica ningún cuaderno se listan las notas de todos los cuadernos
+
+```bash
+bin/rn notes list # Si se agrega --global se listan todas las notas del cuaderno global
+```
+
+- Mostrar contenido de la nota
+
+```bash
+bin/rn notes show [note_name]
+```
+
+### Cuadernos
+- Crear
+
+```bash
+bin/rn books create [book_name]
+```
+
+- Eliminar
+
+```bash
+bin/rn books delete [book_name]
+```
+
+- Cambiar título
+
+```bash
+bin/rn books retitle [current_name] [new_name]
+```
+
+- Listar todos los cuadernos
+
+```bash
+bin/rn notes list
+```
 
 ### Estructura de la plantilla
-
-El proyecto te provee una estructura inicial en la cual podés basarte para implementar tu
-entrega. Esta estructura no es necesariamente rígida, pero tené en cuenta que modificarla
-puede requerir algún trabajo adicional de tu parte.
 
 * `lib/`: directorio que contiene todas las clases del modelo y de soporte para la ejecución
   del programa `bin/rn`.
@@ -109,3 +146,7 @@ puede requerir algún trabajo adicional de tu parte.
   * `lib/rn/version.rb` define la versión de la herramienta, utilizando [SemVer](https://semver.org/lang/es/).
 * `bin/`: directorio donde reside cualquier archivo ejecutable, siendo el más notorio `rn`
   que se utiliza como punto de entrada para el uso de la herramienta.
+
+
+### decisiones de diseño
+Se decidió respetar la estructura basica de la aplicación. Aparte de los archivos generados por defecto se decidieron crear 2 mas, haciendo uso de los múdulos y mixins para agrupar métodos comunes para los comandos de las notas y cuadernos
