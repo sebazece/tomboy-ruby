@@ -2,6 +2,7 @@ module RN
   module Commands
     autoload :Books, 'rn/commands/books'
     autoload :Notes, 'rn/commands/notes'
+    autoload :Exports, 'rn/commands/exports'
     autoload :Version, 'rn/commands/version'
 
     extend Dry::CLI::Registry
@@ -20,6 +21,12 @@ module RN
       prefix.register 'edit', Notes::Edit
       prefix.register 'list', Notes::List
       prefix.register 'show', Notes::Show
+    end
+
+    register 'exports', aliases: ['exp'] do |prefix|
+      prefix.register 'note', Exports::Note
+      prefix.register 'book', Exports::Book
+      prefix.register 'all', Exports::All
     end
 
     register 'version', Version, aliases: ['v', '-v', '--version']

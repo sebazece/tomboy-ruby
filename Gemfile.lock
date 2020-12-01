@@ -6,6 +6,7 @@ GEM
     dry-cli (0.6.0)
       concurrent-ruby (~> 1.0)
     method_source (1.0.0)
+    pandoc-ruby (2.1.4)
     pastel (0.8.0)
       tty-color (~> 0.5)
     pry (0.13.1)
@@ -30,6 +31,7 @@ PLATFORMS
 
 DEPENDENCIES
   dry-cli (~> 0.6)
+  pandoc-ruby
   pry
   tty-editor
 

@@ -150,3 +150,9 @@ bin/rn notes list
 
 ### decisiones de diseño
 Se decidió respetar la estructura basica de la aplicación. Aparte de los archivos generados por defecto se decidieron crear 2 mas, haciendo uso de los múdulos y mixins para agrupar métodos comunes para los comandos de las notas y cuadernos
+
+
+
+### Funcionalidad de exportar
+Para la funcionalidad de exportar se va a necesitar tener instalado en el sistema operativo las siguientes herramientas:
+* [pandoc] (https://pandoc.org/installing.html)

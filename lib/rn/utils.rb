@@ -17,5 +17,9 @@ module RN
       Dir.mkdir(path) unless File.exist?(path)
       path
     end
+
+    def export_file(pdf_file_path, converter)
+      File.open(pdf_file_path, 'w') { |f| f.puts converter.convert }
+    end
   end
 end
