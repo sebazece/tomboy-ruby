@@ -13,7 +13,7 @@ module RN
     end
 
     def default_book_path
-      path = "#{root_path}/cuaderno_global"
+      path = "#{root_path}/.cuaderno_global"
       Dir.mkdir(path) unless File.exist?(path)
       path
     end

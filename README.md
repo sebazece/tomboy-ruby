@@ -4,7 +4,7 @@ La herramienta permite la manipulación tanto de notas (archivos `.rn`) como de 
 
 las notas y cuadernos se almacenan en la carpeta `.my_rns` dentro del directorio `home` del usuario que ejecuta la aplicación.
 
-Todas las notas se alamacenan en un cuaderno, si no se especifica uno, se guarda en el cuaderno por defecto (`cuaderno_global`)
+Todas las notas se alamacenan en un cuaderno, si no se especifica uno, se guarda en el cuaderno por defecto (`.cuaderno_global`)
 
 
 Los nombres de las notas y cuadernos solo aceptan lo letras en minúsculas, mayúscula, números, guiones y guiones bajos
