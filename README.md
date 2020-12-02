@@ -124,6 +124,37 @@ bin/rn books retitle [current_name] [new_name]
 bin/rn notes list
 ```
 
+### Expotar
+***
+### Importante:
+Para que el modulo de exportaciones funcione correctametne se debe tener instalado en el siste operativo las siguientes herramientas:
+
+* [pandoc](https://pandoc.org/installing.html)
+* [Latex](https://www.latex-project.org/get/)
+
+***
+
+El exportar es una funcionalidad la cual interpreta las notas como archivos `markdown` y genera un pdf, el cual es almacenado en el mismo cuaderno donde se encuentra el archivo original.
+En el caso de exportar un cuaderno se genera un archivo pdf por cada nota.
+
+
+- expotar una nota
+
+```bash
+bin/rn exports note [note_name] # --book [book_name] para especificar en que cuaderno esta la nota
+```
+
+- exportar un cuaderno
+
+```bash
+bin/rn exports book [book_name] # --global para exportar las notas del cuaderno global
+```
+
+
+```bash
+bin/rn exports all
+```
+
 ### Estructura de la plantilla
 
 * `lib/`: directorio que contiene todas las clases del modelo y de soporte para la ejecución
@@ -150,9 +181,3 @@ bin/rn notes list
 
 ### decisiones de diseño
 Se decidió respetar la estructura basica de la aplicación. Aparte de los archivos generados por defecto se decidieron crear 2 mas, haciendo uso de los múdulos y mixins para agrupar métodos comunes para los comandos de las notas y cuadernos
-
-
-
-### Funcionalidad de exportar
-Para la funcionalidad de exportar se va a necesitar tener instalado en el sistema operativo las siguientes herramientas:
-* [pandoc] (https://pandoc.org/installing.html)
