@@ -10,9 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_30_163712) do
+ActiveRecord::Schema.define(version: 2021_01_30_181048) do
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "books", force: :cascade do |t|
+    t.string "name"
+    t.boolean "global_book"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "book_id"
+    t.integer "user_id"
+    t.index ["book_id"], name: "index_notes_on_book_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.datetime "remember_created_at"
@@ -21,4 +37,6 @@ ActiveRecord::Schema.define(version: 2021_01_30_163712) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "books", "users"
+  add_foreign_key "notes", "users"
 end

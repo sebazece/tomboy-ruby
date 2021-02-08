@@ -1,17 +1,24 @@
-default: &default
-  adapter: mysql2
-  encoding: utf8mb4
-  database: <%= ENV['DB_NAME'] %>
-  pool: 5
-  username: <%= ENV['DB_USER'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  host: <%= ENV['DB_HOST'] %>
+# default: &default
+#   adapter: mysql2
+#   encoding: utf8mb4
+#   database: <%= ENV['DB_NAME'] %>
+#   pool: 5
+#   username: <%= ENV['DB_USER'] %>
+#   password: <%= ENV['DB_PASSWORD'] %>
+#   host: <%= ENV['DB_HOST'] %>
+
+# development:
+#   <<: *default
+
+# test:
+#   <<: *default
+
+# production:
+#   <<: *default
+
 
 development:
-  <<: *default
-
-test:
-  <<: *default
-
-production:
-  <<: *default
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
