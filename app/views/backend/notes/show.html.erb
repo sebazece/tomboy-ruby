@@ -1,0 +1,20 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+    <li class="breadcrumb-item"><%= link_to 'Notas', backend_notes_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @note.title %></li>
+  </ol>
+</nav>
+
+<div class='container'>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Cuaderno:</h5>
+      <p class="card-text"><%= @note.book.nil? ? '-' : @note.book.name %></p>
+      <h5 class="card-title">Nombre:</h5>
+      <p class="card-text"><%= @note.title %></p>
+      <h5 class="card-title">Contenido:</h5>
+      <p class="card-text"><%= @note.body %></p>
+    </div>
+  </div>
+</div>

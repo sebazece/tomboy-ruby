@@ -1,0 +1,25 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+    <li class="breadcrumb-item"><%= link_to 'Cuadernos', backend_books_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @book.name %></li>
+  </ol>
+</nav>
+<div class='container'>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Nombre:</h5>
+      <p class="card-text"><%= @book.name %></p>
+      <h5 class="card-title">Cantidad de notas:</h5>
+      <p class="card-text"><%= @book.notes.count %></p>
+      <% if @book.notes.any? %>
+        <h5 class='card-text'>Notas:</h5>
+        <ul class="list-group">
+          <% @book.notes.each do |note| %>
+            <li class="list-group-item disabled"><%=  note.title %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

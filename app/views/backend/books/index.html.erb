@@ -1,0 +1,52 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Cuadernos</li>
+  </ol>
+</nav>
+<div class='container'>
+  <%= link_to 'Nueva cuaderno', new_backend_book_path, class: 'btn btn-primary' %>
+  <%= link_to 'Exportar notas sin cuaderno',
+    backend_exports_book_path('nil'),
+    target: '_blank',
+    class: 'btn btn-info' %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Cant. notas</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @books.each do |book| %>
+        <tr>
+          <td><%= book.name %></td>
+          <td><%= book.notes.count %></td>
+          <td>
+            <%= link_to 'Ver',
+              backend_book_path(book.id),
+              class: 'btn btn-success' %>
+
+              <%= link_to 'Editar',
+              edit_backend_book_path(book.id),
+              class: 'btn btn-warning' %>
+
+              <% if book.notes.empty? %>
+                <%= link_to 'Eliminar',
+                backend_book_path(book.id),
+                data: { confirm: '¿Estas seguro?' },
+                method: 'delete',
+                class: 'btn btn-danger' %>
+              <% end %>
+
+              <%= link_to 'Exportar',
+              backend_exports_book_path(book.id),
+              target: '_blank',
+              class: 'btn btn-info' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

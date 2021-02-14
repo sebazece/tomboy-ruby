@@ -1,0 +1,10 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+    <li class="breadcrumb-item"><%= link_to 'Cuadernos', backend_books_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Creación de cuaderno</li>
+  </ol>
+</nav>
+<div class='container'>
+  <%= render 'form' %>
+</div>

@@ -1,0 +1,50 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Notas</li>
+  </ol>
+</nav>
+<div class='container'>
+  <%= link_to 'Nueva nota', new_backend_note_path, class: 'btn btn-primary' %>
+  <%= link_to 'Exportar todas las notas',
+      backend_exports_all_path,
+      target: '_blank',
+      class: 'btn btn-secondary' %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Libro</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @notes.each do |note| %>
+        <tr>
+          <td><%= note.title %></td>
+          <td><%= note.book.nil? ? '-' : note.book.name %></td>
+          <td>
+            <%= link_to 'Ver',
+              backend_note_path(note.id),
+              class: 'btn btn-success' %>
+
+              <%= link_to 'Editar',
+              edit_backend_note_path(note.id),
+              class: 'btn btn-warning' %>
+
+              <%= link_to 'Eliminar',
+              backend_note_path(note.id),
+              data: { confirm: '¿Estas seguro?' },
+              method: 'delete',
+              class: 'btn btn-danger' %>
+
+              <%= link_to 'Exportar',
+              backend_exports_note_path(note.id),
+              target: "_blank",
+              class: 'btn btn-info' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

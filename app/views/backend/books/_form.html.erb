@@ -1,0 +1,8 @@
+<%= form_with model: [:backend, @book] do |form| %>
+  <div class='mb-3'>
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
+    <p class='error'><%= show_errors(@book, :name) %></p>
+  </div>
+  <%= form.submit 'Guardar', class: 'btn btn-primary' %>
+<% end %>

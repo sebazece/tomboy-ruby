@@ -1,0 +1,16 @@
+<%= form_with model: [:backend, @note] do |form| %>
+  <div class='mb-3'>
+    <%= form.label :title, class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-control' %>
+    <p class='error'><%= show_errors(@note, :title) %></p>
+  </div>
+  <div class='mb-3'>
+    <%= form.select :book_id, book_options %>
+  </div>
+  <div class='mb-3'>
+    <%= form.label :body, class: 'form-label' %>
+    <%= form.text_area :body, size: "70x5", class: 'form-control' %>
+    <p class='error'><%= show_errors(@note, :body) %></p>
+  </div>
+  <%= form.submit 'Guardar', class: 'btn btn-primary' %>
+<% end %>
