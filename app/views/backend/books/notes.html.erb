@@ -1,0 +1,37 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Cuadernos', backend_books_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @book.name %></li>
+    <%= link_to 'Nueva nota',
+      new_backend_note_path(book_id: @book.id),
+      class: 'ml-3 btn btn-success' %>
+
+        <%= link_to 'Editar cuaderno',
+          edit_backend_book_path(@book.id),
+          class: 'btn btn-warning ml-5' %>
+
+        <% if @book.notes.empty? %>
+          <%= link_to 'Eliminar cuaderno',
+          backend_book_path(@book.id),
+          data: { confirm: '¿Estas seguro?' },
+          method: 'delete',
+          class: 'btn btn-danger ml-2' %>
+        <% end %>
+        <% if @book.notes.any? %>
+          <%= link_to 'Exportar cuaderno',
+            backend_exports_book_path(@book.id),
+            target: '_blank',
+            class: 'btn btn-info ml-2' %>
+        <% end %>
+  </ol>
+</nav>
+
+
+<div class='flexbox'>
+  <% @book.notes.each do |note| %>
+    <%= link_to backend_note_path(note.id), class: 'text-decoration-none mr-4' do %>
+    <i class="far fa-file-alt fa-5x"></i>
+    <p><%= note.title %></p>
+    <% end %>
+  <% end %>
+</div>

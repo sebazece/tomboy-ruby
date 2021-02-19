@@ -15,6 +15,8 @@ gem 'sqlite3', '~> 1.3', '>= 1.3.6'
 gem 'devise'
 gem 'pandoc-ruby'
 gem 'rubyzip'
+gem 'redcarpet'
+gem 'rouge'
 
 
 group :development, :test do

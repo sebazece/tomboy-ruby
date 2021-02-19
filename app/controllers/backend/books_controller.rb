@@ -3,8 +3,8 @@ module Backend
     before_action :set_book, only: %I[edit update destroy]
 
     def index
-      @global_book_notes_count = global_book_notes_count
       @books = Book.by_user(current_user.id)
+      @global_notes = current_user.notes.where(book_id: nil)
     end
 
     def new
@@ -37,7 +37,7 @@ module Backend
     def update
       result = BookServices::BookUpdater.call(book_params, @book)
       if result.success?
-        redirect_to backend_books_path
+        redirect_to backend_notes_from_book_path(@book.id)
       else
         @book = result.object
         render :new
@@ -52,6 +52,10 @@ module Backend
         @book = result.object
         render :new
       end
+    end
+
+    def notes
+      @book = Book.find(params[:id])
     end
 
     private

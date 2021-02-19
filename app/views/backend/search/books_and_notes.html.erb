@@ -1,0 +1,38 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Cuadernos', backend_books_path %></li>
+  </ol>
+</nav>
+
+<h3>Cuadernos encontradas:</h3>
+
+<div class='flexbox'>
+  <% if @books.empty? %>
+    <p>No se econtraron cuadernos relacionadas a la busqueda</p>
+  <% else %>
+    <% @books.each do |book| %>
+      <%= link_to backend_notes_from_book_path(book.id), class: 'text-decoration-none mr-3' do %>
+        <i class="far fa-folder fa-5x"></i>
+        <p><%= book.name %></p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<h3>Notas econtradas:</h3>
+
+<div class='flexbox'>
+  <% if @notes.empty? %>
+    <p>No se econtraron notas relacionadas a la busqueda</p>
+  <% else %>
+    <% @notes.each do |note| %>
+      <%= link_to backend_note_path(note.id),
+        class: 'text-decoration-none mr-4',
+        data: { bs_toggle: 'tooltip', bs_placement: 'top' },
+        title: "cuaderno: #{note.book.present? ? note.book.name : '-'}" do %>
+        <i class="far fa-file-alt fa-5x"></i>
+        <p><%= note.title %></p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

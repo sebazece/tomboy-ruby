@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :books
+  has_many :notes
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 

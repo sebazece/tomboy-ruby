@@ -19,6 +19,11 @@
           <% end %>
         </li>
       </ul>
+      <%= form_with(url: backend_search_books_and_notes_path, method: 'get', local: true, class: 'd-flex')  do %>
+        <%= search_field_tag :search, @value, class: 'form-control me-2', required: true %>
+        <%= hidden_field_tag :book_id, @book&.id %>
+        <%= button_tag 'Buscar', class: 'btn btn-warning ml-2' %>
+      <% end %>
     </div>
   </div>
 </nav>

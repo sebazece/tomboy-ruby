@@ -1,20 +1,21 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
-    <li class="breadcrumb-item"><%= link_to 'Notas', backend_notes_path %></li>
+    <li class="breadcrumb-item"><%= link_to 'Cuadernos', backend_books_path %></li>
+    <li class="breadcrumb-item"><%= link_to @note.book.present? ? @note.book.name : '-', backend_notes_from_book_path(@note.book_id.present? ? @note.book_id : 'nil') %></li>
     <li class="breadcrumb-item active" aria-current="page"><%= @note.title %></li>
+    <%= link_to 'Editar', edit_backend_note_path(@note.id), class: 'btn btn-warning ml-2' %>
+    <%= link_to 'Eliminar',
+      backend_note_path(@note.id),
+      data: { confirm: '¿Estas seguro?' },
+      method: 'delete',
+      class: 'btn btn-danger ml-2' %>
+
+    <%= link_to 'Exportar',
+      backend_exports_note_path(@note.id),
+      target: "_blank",
+      class: 'btn btn-info ml-2' %>
   </ol>
 </nav>
 
-<div class='container'>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Cuaderno:</h5>
-      <p class="card-text"><%= @note.book.nil? ? '-' : @note.book.name %></p>
-      <h5 class="card-title">Nombre:</h5>
-      <p class="card-text"><%= @note.title %></p>
-      <h5 class="card-title">Contenido:</h5>
-      <p class="card-text"><%= @note.body %></p>
-    </div>
-  </div>
-</div>
+
+<page size="A4"><%= markdown(@note.body) %></page>

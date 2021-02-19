@@ -41,7 +41,7 @@ module Backend
       notes = Note.by_user(current_user.id)
       input_filenames = []
       notes.each do |note|
-        book_name = note.book.nil? ? '(Nota si cuaderno)' : note.book.name
+        book_name = note.book.nil? ? '(Nota sin cuaderno)' : note.book.name
         tmp_path = Rails.root.join("tmp/#{note.title} - Cuaderno: #{book_name}.pdf")
         f = File.new(tmp_path, 'a')
         input_filenames << "#{note.title} - Cuaderno: #{book_name}.pdf"

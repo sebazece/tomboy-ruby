@@ -8,12 +8,15 @@ module Backend
 
     def new
       @note = Note.new
+      @selected_book_id = params[:book_id]
     end
 
     def create
       result = NoteServices::NoteCreator.call(note_params, current_user)
       if result.success?
-        redirect_to backend_notes_path
+        return redirect_to backend_notes_from_book_path(note_params[:book_id]) if note_params[:book_id].present?
+
+        redirect_to backend_books_path
       else
         @note = result.object
         render :new
@@ -27,7 +30,9 @@ module Backend
     def update
       result = NoteServices::NoteUpdater.call(note_params, @note)
       if result.success?
-        redirect_to backend_notes_path
+        return redirect_to backend_notes_from_book_path(@note.book_id) unless @note.book.nil?
+
+        redirect_to backend_books_path
       else
         @note = result.object
         render :new
@@ -37,7 +42,9 @@ module Backend
     def destroy
       result = NoteServices::NoteDestroyer.call(@note)
       if result.success?
-        redirect_to backend_notes_path
+        return redirect_to backend_notes_from_book_path(@note.book_id) if @note.book.present?
+
+        redirect_to root_path
       else
         @note = result.object
         render :new
