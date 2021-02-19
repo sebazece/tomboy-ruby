@@ -65,7 +65,7 @@ module Backend
     end
 
     def global_book_notes_count
-      Note.by_user(current_user.id).where(book_id: nil).count
+      current_user.notes.where(book_id: nil).count
     end
 
     def set_book

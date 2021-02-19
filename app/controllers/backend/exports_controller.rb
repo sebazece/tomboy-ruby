@@ -11,7 +11,7 @@ module Backend
 
     def book
       book = params[:id] == 'nil' ? OpenStruct.new(name: 'Notas sin cuaderno') : Book.find(params[:id])
-      notes = Note.by_user(current_user.id).where(book: params[:id] == 'nil' ? nil : book)
+      notes = current_user.notes.where(book: params[:id] == 'nil' ? nil : book)
       input_filenames = []
 
       notes.each do |note|
@@ -38,7 +38,7 @@ module Backend
     end
 
     def all
-      notes = Note.by_user(current_user.id)
+      notes = current_user.notes
       input_filenames = []
       notes.each do |note|
         book_name = note.book.nil? ? '(Nota sin cuaderno)' : note.book.name

@@ -20,7 +20,9 @@ module Backend
 
     def show; end
 
-    def edit; end
+    def edit
+      @selected_book_id = @note.book_id
+    end
 
     def update
       result = NoteServices::NoteUpdater.call(note_params, @note)
@@ -49,7 +51,7 @@ module Backend
     private
 
     def set_note
-      @note = Note.by_user(current_user.id).find(params[:id])
+      @note = current_user.notes.find(params[:id])
     end
 
     def note_params
