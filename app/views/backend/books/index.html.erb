@@ -22,12 +22,16 @@
     <% end %>
   <% end %>
 </div>
-<hr>
-<div class="flexbox">
-  <% @global_notes.each do |note| %>
-    <%= link_to backend_note_path(note.id), class: 'text-decoration-none mr-4' do %>
-      <i class="far fa-file-alt fa-5x"></i>
-      <p><%= note.title %></p>
+<% if @global_notes.empty? %>
+<% else %>
+  <hr>
+  <p>Notas sin cuaderno:</p>
+  <div class="flexbox">
+    <% @global_notes.each do |note| %>
+      <%= link_to backend_note_path(note.id), class: 'text-decoration-none mr-4' do %>
+        <i class="far fa-file-alt fa-5x"></i>
+        <p><%= note.title %></p>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>

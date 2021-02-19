@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   end
 
   namespace :backend do
-    resources :books, :notes
+    resources :books
+    resources :notes, except: [:index]
     get 'books/:id/notes', to: 'books#notes', as: :notes_from_book
     get 'note/:id', to: 'exports#note', as: :exports_note
     get 'book/:id', to: 'exports#book', as: :exports_book

@@ -1,11 +1,6 @@
 module Backend
   class NotesController < BackendController
     before_action :set_note, only: %I[show edit update destroy]
-
-    def index
-      @notes = Note.by_user(current_user.id)
-    end
-
     def new
       @note = Note.new
       @selected_book_id = params[:book_id]
